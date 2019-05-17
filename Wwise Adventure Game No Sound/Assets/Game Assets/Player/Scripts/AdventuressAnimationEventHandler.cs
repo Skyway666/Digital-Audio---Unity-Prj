@@ -143,6 +143,7 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
     {
         // PLAY SOUND
         Weapon W = PlayerManager.Instance.equippedWeaponInfo;
+
         // HINT: PlayerManager.Instance.weaponSlot contains the selected weapon;
         // HINT: This is a good place to play the weapon swing sounds
     }
