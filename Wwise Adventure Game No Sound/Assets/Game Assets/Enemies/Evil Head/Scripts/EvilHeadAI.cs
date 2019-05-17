@@ -18,9 +18,13 @@ public class EvilHeadAI : Creature
     [Header("Wwise")]
     public float MovementRTPC;
 
+    [Header("Clips")]
+    public AudioClip hover_sound;
+
     #region private variables
     private Vector3 targetLocation = Vector3.zero;
     private IEnumerator chargeRoutine;
+    private AudioSource source;
 
     //Cached Animator hashes
     private readonly int spawnHash = Animator.StringToHash("Spawn");
@@ -37,11 +41,14 @@ public class EvilHeadAI : Creature
         {
             anim = GetComponent<Animator>();
         }
+        source = GetComponent<AudioSource>();
     }
 
     public override void Start(){
 		base.Start();
         // HINT: Hover sound start here
+        source.clip = hover_sound;
+        source.Play();
 	}
 
     public override void OnSpotting()
