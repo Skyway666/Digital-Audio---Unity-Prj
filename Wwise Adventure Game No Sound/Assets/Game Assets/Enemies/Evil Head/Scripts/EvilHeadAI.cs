@@ -18,8 +18,15 @@ public class EvilHeadAI : Creature
     [Header("Wwise")]
     public float MovementRTPC;
 
+
+    [Header("Source")]
+    public AudioSource SFX_Player;
+
     [Header("Clips")]
-    public AudioClip hover_sound;
+    public AudioClip attack_start;
+    public AudioClip charge;
+    public AudioClip explode;
+    public AudioClip bite;
 
     #region private variables
     private Vector3 targetLocation = Vector3.zero;
@@ -47,8 +54,7 @@ public class EvilHeadAI : Creature
     public override void Start(){
 		base.Start();
         // HINT: Hover sound start here
-        source.clip = hover_sound;
-        source.Play();
+        // Play on awake takes care
 	}
 
     public override void OnSpotting()
@@ -80,6 +86,8 @@ public class EvilHeadAI : Creature
         targetLocation = targetOfNPC.transform.position + Vector3.up;
         StartCoroutine(RotateTowardsTarget(targetLocation, 1f));
         // HINT: The head is sending a telegraph attack, this might need a sound effect
+        SFX_Player.clip = attack_start;
+        SFX_Player.Play();
     }
 
 
@@ -120,6 +128,8 @@ public class EvilHeadAI : Creature
     {
         //print(Time.realtimeSinceStartup + ": ChargeTowardsPlayer");
         // HINT: Charge started, a telegrpah sound could be useful here
+        SFX_Player.clip = charge;
+        SFX_Player.Play();
 
         Vector3 currentPosition = transform.position;
         Vector3 destination = targetLocation + ((targetLocation) - currentPosition).normalized * 2f;
@@ -167,6 +177,9 @@ public class EvilHeadAI : Creature
         //print(Time.realtimeSinceStartup + ": Explode");
         // HiNT: We should stop hover sound at this point
 
+        SFX_Player.clip = explode;
+        SFX_Player.Play();
+
         GameObject fx = (GameObject)Instantiate(deathFX, transform.position, Quaternion.identity);
         Destroy(fx, 5f);
 
@@ -191,5 +204,7 @@ public class EvilHeadAI : Creature
     public void PlayBiteSound()
     {
         // HINT: Looks like a good place to play the bite sound
+        SFX_Player.clip = bite;
+        SFX_Player.Play();
     }
 }
