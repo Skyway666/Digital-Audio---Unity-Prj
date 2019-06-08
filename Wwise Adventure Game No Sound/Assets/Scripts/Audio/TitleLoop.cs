@@ -14,6 +14,7 @@ public class TitleLoop : MonoBehaviour
     {
         source = GetComponent<AudioSource>();
         clip_duration = 82;
+        clip_started = Time.time;
     }
 
     // Update is called once per frame
