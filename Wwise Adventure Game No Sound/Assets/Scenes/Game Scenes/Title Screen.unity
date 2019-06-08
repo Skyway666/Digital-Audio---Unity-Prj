@@ -27460,6 +27460,7 @@ GameObject:
   - component: {fileID: 1576736414}
   - component: {fileID: 1576736417}
   - component: {fileID: 1576736409}
+  - component: {fileID: 1576736416}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -27679,6 +27680,18 @@ MonoBehaviour:
   useDepthTexture: 1
   sunShaftsShader: {fileID: 4800000, guid: d3b1c8c1036784176946f5cfbfb7fe4c, type: 3}
   simpleClearShader: {fileID: 4800000, guid: f688f89ed5eb847c5b19c934a0f1e772, type: 3}
+--- !u!114 &1576736416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576736408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9834e616d8b934a8a317a303089b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1576736417
 MonoBehaviour:
   m_ObjectHideFlags: 0
