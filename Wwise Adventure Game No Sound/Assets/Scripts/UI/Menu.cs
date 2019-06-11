@@ -20,6 +20,13 @@ public class Menu : MonoBehaviour
     public AnimatedObjectActiveHandler QuestBox;
     public bool GetMouseWithP = false;
 
+    [Header("Source")]
+    public AudioSource SFX_Player;
+
+    [Header("Clips")]
+    public AudioClip open;
+    public AudioClip close;
+
     public MenuEvent OnMenuDown;
 
     private bool menuOpen = false;
@@ -49,6 +56,8 @@ public class Menu : MonoBehaviour
             isOpen = menuOpen;
             if (menuOpen)
             {
+                SFX_Player.clip = open;
+                SFX_Player.Play();
                 // HINT: Play menu open sound here
                 GameManager.Instance.gameSpeedHandler.PauseGameSpeed(gameObject.GetInstanceID());
                 GameManager.Instance.BlurCam();
@@ -61,6 +70,8 @@ public class Menu : MonoBehaviour
             }
             else
             {
+                SFX_Player.clip = close;
+                SFX_Player.Play();
                 // HINT: Play menu close sound here
                 GameManager.Instance.gameSpeedHandler.UnPauseGameSpeed(gameObject.GetInstanceID());
                 GameManager.Instance.UnBlurCam();
