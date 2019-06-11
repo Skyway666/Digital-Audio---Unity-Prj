@@ -4,6 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ZoneTrigger : MonoBehaviour
@@ -24,6 +26,8 @@ public class ZoneTrigger : MonoBehaviour
                 Protector(col);
             }
         }
+
+
     }
 
     void OnTriggerExit(Collider col)
