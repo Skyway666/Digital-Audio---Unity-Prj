@@ -36,8 +36,9 @@ public class WwizardAI : Creature
     private readonly int questChargeHash = Animator.StringToHash("Quest_Charge");
     private readonly int questChargeDoneHash = Animator.StringToHash("Quest_ChargeDone");
     private readonly int randomTalkHash = Animator.StringToHash("RandomTalk");
-
+    private bool justABool = false;
     #endregion
+
 
     public void TalkAnimation_CalculateNew()
     {
@@ -66,6 +67,8 @@ public class WwizardAI : Creature
 
             SFX_Player.clip = poof;
             SFX_Player.Play();
+
+
             // HINT: You might want to play the Poof gimmick sound here
 
             Destroy(p, 5f);
