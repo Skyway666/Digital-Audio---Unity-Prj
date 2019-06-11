@@ -55,6 +55,9 @@ public class Inventory : MonoBehaviour
 
     public static bool InventoryIsOut = false;
 
+    AudioSource invSource;
+    public AudioClip openClip, closeClip, switchClip, selectClip;
+
     #region private variables
     private bool hasShown = false;
     private int SelectIncrementor_Row1 = 0;
@@ -82,6 +85,8 @@ public class Inventory : MonoBehaviour
     void OnEnable()
     {
         canvasGroup.interactable = false;
+        invSource = transform.GetComponent<AudioSource>();
+
 
         ScaleSizes = new List<float>();
         float scaleMultiplier = 0.1f;
@@ -133,6 +138,7 @@ public class Inventory : MonoBehaviour
         {
             OrderCheck(1, StoreSpawns, Positions, false, incre);
         }
+        
     }
 
     void OrderCheck(int size, List<GameObject> ItemIcons, List<GameObject> OriginalPos, bool shift, int incre)
@@ -598,6 +604,7 @@ public class Inventory : MonoBehaviour
             MarkerVisibility(99);
         }
 
+
         if (ShowRow1)
         {
             MoveInventoryObjects(OriginalPositions.Row1, InventoryReference.Items, SelectIncrementor_Row1, ItemIcon);
@@ -616,11 +623,17 @@ public class Inventory : MonoBehaviour
         }
 
         MarkerVisibility(SelectedRow);
+
+        invSource.clip = switchClip;
+        invSource.Play();
     }
     void OnArrowDown()
     {
         SelectedRow = RowShift + ((SelectedRow += 1) % RowAmount);
         MarkerVisibility(SelectedRow);
+
+        invSource.clip = switchClip;
+        invSource.Play();
     }
 
 
@@ -720,6 +733,9 @@ public class Inventory : MonoBehaviour
             InputManager.OnLeftArrowDown += ArrowPressLeft;
 
             GameManager.Instance.BlurCam();
+
+            invSource.clip = openClip;
+            invSource.Play();
         }
     }
 
@@ -741,6 +757,9 @@ public class Inventory : MonoBehaviour
             {
                 GameManager.Instance.UnBlurCam();
             }
+
+            invSource.clip = closeClip;
+            invSource.Play();
         }
     }
 
@@ -757,6 +776,9 @@ public class Inventory : MonoBehaviour
         {
             print("Inventory: No Inventory Items to the right");
         }
+
+        invSource.clip = switchClip;
+        invSource.Play();
     }
     void ArrowPressLeft()
     {
@@ -768,6 +790,9 @@ public class Inventory : MonoBehaviour
         {
             print("Inventory: No Inventory Items to the left");
         }
+
+        invSource.clip = switchClip;
+        invSource.Play();
     }
 
     void Update()

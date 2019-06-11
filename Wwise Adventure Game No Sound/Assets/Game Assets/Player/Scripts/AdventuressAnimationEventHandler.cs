@@ -84,8 +84,9 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
                 if (side == FootSide.left )
                 {
                     //if (foot_L.FootstepSound.Validate())
-                    { 
+                    {
                         // HINT: Play left footstep sound
+                        //leftFootStep.Play();
                         particlePosition = foot_L.transform.position;
                         FootstepParticles(particlePosition);
                         AudioSource audioSource = GetComponent<AudioSource>();
@@ -97,6 +98,7 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
                     //if (foot_R.FootstepSound.Validate())
                     {
                         // HINT: Play right footstep sound
+                        //rightFootStep.Play();
                         particlePosition = foot_R.transform.position;
                         FootstepParticles(particlePosition);
                         AudioSource audioSource = GetComponent<AudioSource>();
@@ -143,6 +145,9 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
     {
         // PLAY SOUND
         Weapon W = PlayerManager.Instance.equippedWeaponInfo;
+        //AudioSource audioSource = GetComponent<AudioSource>();
+
+        //if (W.GetComponent<Weapon>().weaponType == WeaponTypes.Dagger) "Audio Assets/SFX/Objects/Pickups/BAS_Pickup_WeaponType_Dagger.wav"
 
         // HINT: PlayerManager.Instance.weaponSlot contains the selected weapon;
         // HINT: This is a good place to play the weapon swing sounds

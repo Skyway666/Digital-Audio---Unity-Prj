@@ -26,6 +26,8 @@ public class WorldTeleporter : MonoBehaviour
 
     private UnityAction<int> teleport;
 
+    AudioSource teleSource;
+
     private void Awake()
     {
         LanguageManager.OnLanguageChange += ConfigureTeleportLocations;
@@ -39,6 +41,8 @@ public class WorldTeleporter : MonoBehaviour
     void OnEnable()
     {
         ConfigureTeleportLocations();
+
+        teleSource = transform.GetComponent<AudioSource>();
     }
 
     private void ConfigureTeleportLocations()
@@ -87,6 +91,7 @@ public class WorldTeleporter : MonoBehaviour
                 GameObject go = Instantiate(teleportParticles, PlayerManager.Instance.player.transform.position, Quaternion.identity) as GameObject;
                 Destroy(go, 5f);
             }
+            teleSource.Play();
         }
     }
 }

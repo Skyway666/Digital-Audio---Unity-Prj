@@ -10,6 +10,14 @@ using System.Collections.Generic;
 
 public class EvilSpitPlantProjectile : MonoBehaviour
 {
+    [Header("Source")]
+    public AudioSource SFX_Player;
+
+    [Header("Clips")]
+    public AudioClip moving;
+    public AudioClip hit;
+    public AudioClip miss;
+
     [Header("Prefab Links")]
     public GameObject explodeParticles;
     public GameObject deflectParticles;
@@ -48,6 +56,10 @@ public class EvilSpitPlantProjectile : MonoBehaviour
     IEnumerator MoveSpitBullet()
     {
         // HINT: Spit bullet started moving, you might want to start playing its continuous sound here
+        SFX_Player.loop = true;
+        SFX_Player.clip = moving;
+        SFX_Player.Play();
+
         while (time < duration)
         {
             rb.velocity = transform.forward * speed;
@@ -120,6 +132,8 @@ public class EvilSpitPlantProjectile : MonoBehaviour
             isExploding = true;
 
             // HINT: Spit bullet stopped, you might want to stop playing its continuous sound here
+            SFX_Player.loop = false;
+            SFX_Player.Stop();
 
             GetComponent<Collider>().enabled = false;
             time = duration;
@@ -131,10 +145,14 @@ public class EvilSpitPlantProjectile : MonoBehaviour
             if (hitSomething)
             {
                 // HINT: Explosion did hit something, you may want to play the explosion hit sound here
+                SFX_Player.clip = hit;
+                SFX_Player.Play();
             }
             else
             {
                 // HINT: Explosion didn't hit something, you may want to play the explosion miss sound here
+                SFX_Player.clip = miss;
+                SFX_Player.Play();
             }
 
             Destroy(go, 5f);

@@ -3,10 +3,10 @@
 // Copyright (c) 2018 Audiokinetic Inc. / All Rights Reserved
 //
 ////////////////////////////////////////////////////////////////////////
-
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+using System.Collections;
+using System.Collections.Generic;
 
 public class WwizardStaffChargeParticles : MonoBehaviour
 {
@@ -20,14 +20,28 @@ public class WwizardStaffChargeParticles : MonoBehaviour
     public float animationStrength = 1f;
     public float animationSpeed = 5f;
 
+    public GameObject wwizard;
+
+
+
+    [Header("Source")]
+    public AudioSource SFX_Player;
+
+    [Header("Clips")]
+    public AudioClip charging;
+    public AudioClip uncharging;
+
     [Header("End Point Settings")]
     public GameObject endPoint;
+    public GameObject wwizard;
 
     public GameObject chargeDoneParticles;
 
     #region private variables
     private IEnumerator chargeRoutine;
     #endregion
+
+
 
     void OnEnable()
     {
@@ -38,6 +52,8 @@ public class WwizardStaffChargeParticles : MonoBehaviour
 
         if (endPoint != null)
         {
+            SFX_Player.clip = charge;
+            SFX_Player.Play();
             // HINT: Wizard staff charge particles appear, you may want to play the appropiate sound effect here
             chargeRoutine = AnimatePoints();
             StartCoroutine(chargeRoutine);
@@ -76,6 +92,9 @@ public class WwizardStaffChargeParticles : MonoBehaviour
     void OnDisable()
     {
         // HINT: Wizard staff charge particles disappear, you may want to play the appropiate sound effect here
+        SFX_Player.clip = uncharge;
+        SFX_Player.Play();
+
         StopCoroutine(chargeRoutine);
         if (lineRenderer != null)
         {
