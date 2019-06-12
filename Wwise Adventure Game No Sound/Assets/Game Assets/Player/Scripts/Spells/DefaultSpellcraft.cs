@@ -37,6 +37,12 @@ public class DefaultSpellcraft : MonoBehaviour
 
     public int SpellSelect = 0;
 
+    [Header("Source")]
+    public AudioSource SFX_Player;
+
+    [Header("Clips")]
+    public AudioClip charging;
+    public AudioClip uncharging;
 
     [Header("WWISE")]
     public float SpellChargeLevel = 0f;
@@ -56,6 +62,9 @@ public class DefaultSpellcraft : MonoBehaviour
 
         SpellChargeLevel = 0f;
         // HINT: Spell starts charging, you may want to play the appropiate sound effect here
+        SFX_Player.clip = charging;
+        SFX_Player.loop = true;
+        SFX_Player.Play();
 
         InputManager.OnUseDown += OnCharge;
         InputManager.OnUseUp += OffCharge;
@@ -63,6 +72,10 @@ public class DefaultSpellcraft : MonoBehaviour
 
     public void DisableMagic()
     {
+        SFX_Player.Stop();
+        SFX_Player.clip = uncharging;
+        SFX_Player.loop = false;
+        SFX_Player.Play();
         // HINT: Spell stops charging, you may want to stop the charge effect here
         Spellcraft[SpellSelect].Charge.OnCharge[0].Deactivate();
         InputManager.OnUseDown -= OnCharge;
@@ -90,7 +103,9 @@ public class DefaultSpellcraft : MonoBehaviour
             {
                 Spellcraft[SpellSelect].Charge.OnCharge[s].Activate();
             }
-
+            SFX_Player.clip = charging;
+            SFX_Player.loop = true;
+            SFX_Player.Play();
             // SPELL SOUND
             // HINT: Spell charge start sound effect should be played here
             startRotation = transform.rotation;
@@ -170,6 +185,11 @@ public class DefaultSpellcraft : MonoBehaviour
             {
                 // HINT: Spell charge stop sound effect should be played here
                 // Activate Spells
+                SFX_Player.Stop();
+                SFX_Player.clip = uncharging;
+                SFX_Player.loop = false;
+                SFX_Player.Play();
+
                 PlayerManager.Instance.playerAnimator.SetBool(canShootMagicHash, false);
                 for (int R = 0; R < Spellcraft[SpellSelect].Release.OnRelease.Count; R++)
                 {
@@ -181,6 +201,10 @@ public class DefaultSpellcraft : MonoBehaviour
                     // SPELL SOUND
                     SpellChargeLevel = Spellcraft[SpellSelect].Charge.ChargeAmount * 100;
                     // HINT: Spell is casted, you might want to play the appropiate sound here
+                    SFX_Player.Stop();
+                    SFX_Player.clip = uncharging;
+                    SFX_Player.loop = false;
+                    SFX_Player.Play();
                 }
             }
         }

@@ -90,6 +90,11 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
                         particlePosition = foot_L.transform.position;
                         FootstepParticles(particlePosition);
                         AudioSource audioSource = GetComponent<AudioSource>();
+                        string file = "Audio Assets/SFX/Character/Footsteps/BAS_Player_Footstep_dirt_run_0";
+                        file += Random.Range(1, 5);
+                        file += ".wav";
+                        print(file);
+                        leftFootStep = (AudioClip)Resources.Load(file);
                         audioSource.PlayOneShot(leftFootStep, 0.7F);
                     }
                 }
@@ -102,6 +107,11 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
                         particlePosition = foot_R.transform.position;
                         FootstepParticles(particlePosition);
                         AudioSource audioSource = GetComponent<AudioSource>();
+                        string file = "Audio Assets/SFX/Character/Footsteps/BAS_Player_Footstep_dirt_run_0";
+                        file += Random.Range(1, 5);
+                        file += ".wav";
+                        print(file);
+                        rightFootStep = (AudioClip)Resources.Load(file);
                         audioSource.PlayOneShot(rightFootStep, 0.7F);
                     }
                 }

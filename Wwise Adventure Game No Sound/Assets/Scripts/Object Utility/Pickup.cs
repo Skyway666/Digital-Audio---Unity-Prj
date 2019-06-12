@@ -26,8 +26,11 @@ public class Pickup : MonoBehaviour, IInteractable
 	[HideInInspector]
 	public SphereCollider trigger;
 
-	#region private variables
-	private float randomOffset;
+    [Header("Clips")]
+    public AudioClip pickup;
+
+    #region private variables
+    private float randomOffset;
 	private bool playerInTrigger;
 	private GameObject outline;
 	private bool inConversation = false;
@@ -186,8 +189,11 @@ public class Pickup : MonoBehaviour, IInteractable
 
 			if (interactionSound)
 			{
-				// HINT: Play the sound for this pickup
-			}
+                // HINT: Play the sound for this pickup
+                AudioSource SFX_Player = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+                SFX_Player.clip = pickup;
+                SFX_Player.Play();
+            }
 			if (pickupParticles != null)
 			{
 				GameObject p = Instantiate(pickupParticles, transform.position, Quaternion.identity) as GameObject;
